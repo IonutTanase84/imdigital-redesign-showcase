@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  word-wrap: normal;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: var(--font-black);
+}
+
+h1 {
+  font-size: 62px;
+  line-height: 65px;
+
+  @media (max-width: 1024px) {
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 48px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 30px;
+    line-height: 32px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+h2 {
+  font-size: 60px;
+  line-height: 1;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media (max-width: 1024px) {
+    font-size: 52px;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 28px;
+  }
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1;
+  font-weight: var(--font-bold);
+}

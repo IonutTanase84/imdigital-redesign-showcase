@@ -1,0 +1,104 @@
+:host {
+  .app-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: 999px;
+  background: transparent;
+  font-weight: var(--font-bold);
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-medium);
+  }
+
+  &:hover {
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  &.app-button-light {
+    color: var(--color-text);
+    border-color: currentColor;
+
+    &::before {
+      background: var(--gradient-brand);
+    }
+
+  }
+
+  &.app-button-dark {
+    color: var(--color-bg);
+    border-color: currentColor;
+
+    &::before {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    }
+
+  }
+
+  &.app-button-sm {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  &.app-button-md {
+    padding: 12px 22px;
+    font-size: 15px;
+  }
+
+  &.app-button-lg {
+    padding: 14px 30px;
+    font-size: 16px;
+  }
+
+  &.app-button-icon {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    font-size: 14px;
+  }
+}
+}
+
+:host-context(.theme-light) {
+  .app-button {
+    &.app-button-light,
+    &.app-button-dark {
+      color: var(--color-text);
+      border-color: currentColor;
+
+      &::before {
+        background: #ffffff;
+      }
+    }
+  }
+
+  :host(.feature-card-action) {
+    .app-button {
+      &.app-button-light {
+        color: var(--color-on-gradient);
+        border-color: currentColor;
+
+        &::before {
+          background: var(--gradient-brand);
+        }
+      }
+    }
+  }
+}

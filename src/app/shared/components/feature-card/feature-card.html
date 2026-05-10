@@ -1,0 +1,32 @@
+<article
+  class="feature-card"
+  [class.feature-card-compact]="variant() === 'compact'"
+  [class.feature-card-featured]="variant() === 'featured'"
+  [class.feature-card-floating]="variant() === 'floating'"
+>
+  @if (showCheckbox()) {
+    <span class="feature-card-check" aria-hidden="true"></span>
+  }
+
+  <div
+    class="feature-card-icon d-flex align-items-center justify-content-center"
+    [style.color]="iconColors[icon()]"
+    aria-hidden="true"
+  >
+    <fa-icon class="d-flex align-items-center justify-content-center" [icon]="icons[icon()]" />
+  </div>
+
+  <div class="feature-card-copy">
+    <h3>
+      {{ title() }}
+    </h3>
+
+    <p>
+      {{ hoverText() }}
+    </p>
+  </div>
+
+  <app-button class="feature-card-action" variant="light" size="icon" [ariaLabel]="title()">
+    <fa-icon [icon]="actionIcon" aria-hidden="true" />
+  </app-button>
+</article>

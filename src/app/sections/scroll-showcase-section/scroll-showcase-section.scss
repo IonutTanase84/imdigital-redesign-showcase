@@ -1,0 +1,380 @@
+:host {
+  .showcase-stage {
+    --showcase-bg-1: 72% 44%;
+    --showcase-bg-2: 18% 76%;
+    --showcase-bg-3: 46% 28%;
+    height: 100svh;
+    min-height: 560px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    isolation: isolate;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+
+    &.showcase-stage-bg-hero {
+      --showcase-bg-1: 72% 44%;
+      --showcase-bg-2: 18% 76%;
+      --showcase-bg-3: 46% 28%;
+    }
+
+    &.showcase-stage-bg-demos {
+      --showcase-bg-1: 58% 24%;
+      --showcase-bg-2: 34% 66%;
+      --showcase-bg-3: 62% 42%;
+    }
+
+    &.showcase-stage-bg-know-more {
+      --showcase-bg-1: 84% 18%;
+      --showcase-bg-2: 8% 52%;
+      --showcase-bg-3: 34% 58%;
+    }
+
+    &.showcase-stage-bg-next-steps {
+      --showcase-bg-1: 48% 16%;
+      --showcase-bg-2: 42% 44%;
+      --showcase-bg-3: 72% 68%;
+    }
+
+    .showcase-background {
+      z-index: -2;
+      background-repeat: no-repeat;
+      background:
+        radial-gradient(
+          circle at 72% 44%,
+          color-mix(in srgb, var(--color-gradient-mid) 42%, transparent),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 18% 76%,
+          color-mix(in srgb, var(--color-gradient-end) 32%, transparent),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 46% 28%,
+          color-mix(in srgb, var(--color-accent) 24%, transparent),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          var(--color-bg) 0%,
+          color-mix(in srgb, var(--color-primary) 34%, var(--color-bg)) 45%,
+          color-mix(in srgb, var(--color-gradient-end) 32%, var(--color-bg)) 100%
+        );
+      background-size:
+        150% 150%,
+        135% 135%,
+        140% 140%,
+        100% 100%;
+      background-position: var(--showcase-bg-1), var(--showcase-bg-2), var(--showcase-bg-3), center;
+      transition: background-position 0.95s cubic-bezier(0.65, 0, 0.35, 1);
+
+      &::after {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--color-bg) 14%, transparent),
+          color-mix(in srgb, var(--color-bg) 22%, transparent)
+        );
+        content: '';
+      }
+    }
+
+    .showcase-panel {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      will-change: transform, opacity;
+
+      &.is-active {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+      }
+
+      .app-container {
+        padding: var(--navbar-height) 48px 24px;
+
+        @media (max-width: 1024px) {
+          padding: var(--navbar-height) 20px 34px;
+        }
+
+        @media (max-width: 640px) {
+          padding: 58px 16px 16px;
+        }
+      }
+    }
+
+    .stage-indicator {
+      z-index: 4;
+      pointer-events: none;
+      transition: opacity var(--transition-fast);
+
+      &.is-hidden {
+        opacity: 0;
+      }
+
+      @media (max-width: 640px) {
+        display: none !important;
+      }
+    }
+
+    .indicator-track {
+      position: relative;
+      pointer-events: auto;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(180deg, transparent, var(--color-accent), transparent);
+        content: '';
+        transform: translateX(-50%);
+      }
+    }
+
+    .indicator-dot {
+      position: relative;
+      display: grid;
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      place-items: center;
+      border: 1px solid color-mix(in srgb, var(--color-text) 36%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--color-text) 20%, transparent);
+      color: var(--color-text);
+      backdrop-filter: blur(10px);
+      transition:
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+
+      &:hover {
+        border-color: var(--color-accent);
+        transform: scale(1.15);
+      }
+
+      &.is-active {
+        border-color: var(--color-accent);
+        background: var(--color-accent);
+        box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 42%, transparent);
+        transform: scale(1.25);
+      }
+    }
+
+    .scroll-explore {
+      bottom: 24px;
+      z-index: 4;
+      gap: 12px;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      transition:
+        opacity var(--transition-fast),
+        transform var(--transition-fast);
+
+      &.is-hidden {
+        opacity: 0;
+        transform: translate(-50%, 10px) !important;
+      }
+
+      @media (max-width: 640px) {
+        bottom: 14px;
+        gap: 10px;
+        font-size: 12px;
+      }
+    }
+
+    .scroll-mouse {
+      position: relative;
+      display: inline-flex;
+      width: 18px;
+      height: 30px;
+      justify-content: center;
+      border: 1px solid color-mix(in srgb, var(--color-text) 62%, transparent);
+      border-radius: 999px;
+
+      @media (max-width: 640px) {
+        width: 16px;
+        height: 26px;
+      }
+
+      span {
+        position: absolute;
+        top: 6px;
+        width: 2px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--color-accent);
+        animation: mouse-line 1.5s ease-in-out infinite;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      min-height: 100svh;
+    }
+  }
+}
+
+:host-context(.theme-light) {
+  .showcase-stage {
+    --showcase-light-orb-1: 74% 40%;
+    --showcase-light-orb-2: 16% 78%;
+    --showcase-light-orb-3: 44% 24%;
+    --showcase-light-angle: 136deg;
+    --showcase-light-start: color-mix(
+      in srgb,
+      var(--color-gradient-start) 18%,
+      var(--color-on-gradient)
+    );
+    --showcase-light-mid: color-mix(
+      in srgb,
+      var(--color-gradient-mid) 14%,
+      var(--color-on-gradient)
+    );
+    --showcase-light-end: color-mix(
+      in srgb,
+      var(--color-gradient-end) 12%,
+      var(--color-on-gradient)
+    );
+
+    &.showcase-stage-bg-hero {
+      --showcase-light-orb-1: 74% 40%;
+      --showcase-light-orb-2: 16% 78%;
+      --showcase-light-orb-3: 44% 24%;
+      --showcase-light-angle: 136deg;
+      --showcase-light-start: color-mix(
+        in srgb,
+        var(--color-gradient-start) 20%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-mid: color-mix(
+        in srgb,
+        var(--color-gradient-mid) 15%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-end: color-mix(
+        in srgb,
+        var(--color-gradient-end) 12%,
+        var(--color-on-gradient)
+      );
+    }
+
+    &.showcase-stage-bg-demos {
+      --showcase-light-orb-1: 62% 20%;
+      --showcase-light-orb-2: 30% 70%;
+      --showcase-light-orb-3: 70% 40%;
+      --showcase-light-angle: 152deg;
+      --showcase-light-start: color-mix(
+        in srgb,
+        var(--color-gradient-start) 18%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-mid: color-mix(in srgb, var(--color-primary) 16%, var(--color-on-gradient));
+      --showcase-light-end: color-mix(
+        in srgb,
+        var(--color-gradient-end) 11%,
+        var(--color-on-gradient)
+      );
+    }
+
+    &.showcase-stage-bg-know-more {
+      --showcase-light-orb-1: 86% 14%;
+      --showcase-light-orb-2: 10% 52%;
+      --showcase-light-orb-3: 34% 60%;
+      --showcase-light-angle: 128deg;
+      --showcase-light-start: color-mix(
+        in srgb,
+        var(--color-gradient-start) 16%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-mid: color-mix(
+        in srgb,
+        var(--color-gradient-mid) 13%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-end: color-mix(
+        in srgb,
+        var(--color-gradient-end) 16%,
+        var(--color-on-gradient)
+      );
+    }
+
+    &.showcase-stage-bg-next-steps {
+      --showcase-light-orb-1: 50% 12%;
+      --showcase-light-orb-2: 40% 42%;
+      --showcase-light-orb-3: 74% 68%;
+      --showcase-light-angle: 144deg;
+      --showcase-light-start: color-mix(
+        in srgb,
+        var(--color-gradient-start) 17%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-mid: color-mix(
+        in srgb,
+        var(--color-gradient-mid) 15%,
+        var(--color-on-gradient)
+      );
+      --showcase-light-end: color-mix(
+        in srgb,
+        var(--color-gradient-end) 14%,
+        var(--color-on-gradient)
+      );
+    }
+
+    .showcase-background {
+      background:
+        radial-gradient(
+          circle at var(--showcase-light-orb-1),
+          color-mix(in srgb, var(--color-gradient-start) 22%, transparent),
+          transparent 38%
+        ),
+        radial-gradient(
+          circle at var(--showcase-light-orb-2),
+          color-mix(in srgb, var(--color-gradient-mid) 18%, transparent),
+          transparent 36%
+        ),
+        radial-gradient(
+          circle at var(--showcase-light-orb-3),
+          color-mix(in srgb, var(--color-gradient-end) 20%, transparent),
+          transparent 37%
+        ),
+        linear-gradient(
+          var(--showcase-light-angle),
+          var(--showcase-light-start) 0%,
+          var(--showcase-light-mid) 48%,
+          var(--showcase-light-end) 100%
+        );
+      background-size:
+        165% 165%,
+        148% 148%,
+        150% 150%,
+        100% 100%;
+
+      &::after {
+        background: linear-gradient(
+          180deg,
+          color-mix(in srgb, var(--color-on-gradient) 6%, transparent),
+          color-mix(in srgb, var(--color-gradient-mid) 7%, transparent)
+        );
+      }
+    }
+  }
+}
+
+@keyframes mouse-line {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}

@@ -1,0 +1,58 @@
+<div class="row align-items-center justify-content-center hero-row">
+  <div class="col-lg-4 hero-content">
+    <h1 class="stage-reveal">
+      {{ titlePrefix }}
+      <span>{{ titleHighlight }}</span>
+    </h1>
+
+    <p class="stage-reveal">
+      {{ hero.text }}
+    </p>
+
+    <div class="stage-reveal">
+      <app-button
+        [label]="hero.cta.label"
+        [trackingName]="hero.cta.trackingName"
+        [ariaLabel]="hero.cta.aria"
+        variant="light"
+        size="lg"
+        (pressed)="ctaSelected.emit()"
+      />
+    </div>
+  </div>
+
+  <div class="col-lg-8 d-flex justify-content-center hero-visual-column">
+    <div
+      class="hero-visual stage-reveal position-relative w-100 d-flex align-items-center justify-content-center"
+    >
+      <img class="hero-scan-image w-100 h-100" src="/assets/bulb2.svg" alt="" aria-hidden="true" />
+
+      <svg
+        class="hero-connector-lines position-absolute pe-none overflow-visible"
+        viewBox="0 0 680 680"
+        aria-hidden="true"
+      >
+        <path class="hero-connector hero-connector-0" d="M420 170 C510 118 590 118 620 185" />
+        <path class="hero-connector hero-connector-1" d="M278 365 C170 318 100 362 92 456" />
+        <path class="hero-connector hero-connector-2" d="M438 405 C520 360 606 388 616 462" />
+      </svg>
+
+      @for (badge of heroBadges; track badge.title; let badgeIndex = $index) {
+        <div
+          class="hero-floating-card position-absolute"
+          [class.hero-floating-card-0]="badgeIndex === 0"
+          [class.hero-floating-card-1]="badgeIndex === 1"
+          [class.hero-floating-card-2]="badgeIndex === 2"
+        >
+          <app-feature-card
+            [title]="badge.title"
+            [icon]="badge.icon"
+            [hoverText]="badge.text"
+            [showCheckbox]="true"
+            variant="floating"
+          />
+        </div>
+      }
+    </div>
+  </div>
+</div>

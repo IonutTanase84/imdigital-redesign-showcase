@@ -1,0 +1,241 @@
+.hero-content {
+  h1,
+  p {
+    margin-bottom: 32px;
+
+    @media (max-width: 640px) {
+      margin-bottom: 24px;
+    }
+  }
+
+  h1 {
+    span {
+      display: inline-block;
+      background: var(--gradient-brand);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  p {
+    @media (max-width: 640px) {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  .stage-reveal {
+    @media (max-width: 640px) {
+      ::ng-deep .app-button.app-button-lg {
+        padding: 11px 22px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 640px) {
+    margin-bottom: 20px;
+  }
+}
+
+.hero-row {
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (max-width: 640px) {
+    margin-right: 0;
+    margin-left: 0;
+    --bs-gutter-x: 12px;
+    gap: 10px;
+  }
+}
+
+.hero-visual {
+  width: min(700px, 100%);
+  aspect-ratio: 1;
+  perspective: 900px;
+  transform-style: preserve-3d;
+
+  @media (max-width: 1024px) {
+    width: min(560px, 100%);
+  }
+
+  @media (max-width: 640px) {
+    width: 330px;
+    height: 330px;
+    max-width: 100%;
+    aspect-ratio: auto;
+
+    .hero-scan-image {
+      transform: scale(0.82);
+    }
+  }
+
+  &::before {
+    position: absolute;
+    inset: -9%;
+    z-index: -1;
+    background:
+      radial-gradient(
+        circle at 48% 42%,
+        color-mix(in srgb, var(--color-accent) 38%, transparent),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 52% 54%,
+        color-mix(in srgb, var(--color-gradient-mid) 46%, transparent),
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 48% 72%,
+        color-mix(in srgb, var(--color-gradient-end) 28%, transparent),
+        transparent 34%
+      );
+    content: '';
+    filter: blur(22px);
+    opacity: 0.95;
+    transform: translateZ(-1px);
+  }
+
+  &::after {
+    position: absolute;
+    inset: -2%;
+    background: var(--gradient-brand);
+    content: '';
+    filter: blur(8px);
+    mix-blend-mode: color-dodge;
+    opacity: 0.82;
+    pointer-events: none;
+    -webkit-mask: url('/assets/bulb2.svg') center / contain no-repeat;
+    mask: url('/assets/bulb2.svg') center / contain no-repeat;
+  }
+
+  .hero-scan-image {
+    object-fit: contain;
+    transform-origin: center;
+    animation: stage-scan-float 16s ease-in-out infinite;
+    filter: drop-shadow(0 24px 36px color-mix(in srgb, var(--color-bg) 42%, transparent))
+      drop-shadow(0 0 20px color-mix(in srgb, var(--color-accent) 38%, transparent))
+      drop-shadow(0 0 54px color-mix(in srgb, var(--color-gradient-mid) 46%, transparent))
+      drop-shadow(0 0 92px color-mix(in srgb, var(--color-gradient-end) 28%, transparent));
+  }
+
+  .hero-connector-lines {
+    inset: -3%;
+    z-index: 1;
+    width: 106%;
+    height: 106%;
+  }
+
+  .hero-connector {
+    fill: none;
+    stroke: color-mix(in srgb, var(--color-gradient-mid) 62%, transparent);
+    stroke-dasharray: 6 9;
+    stroke-linecap: round;
+    stroke-width: 1.4;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 8px color-mix(in srgb, var(--color-gradient-mid) 62%, transparent));
+  }
+}
+
+.hero-floating-card {
+  width: 124px;
+  z-index: 2;
+
+  ::ng-deep .feature-card.feature-card-floating .feature-card-check {
+    top: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+
+    @media (max-width: 640px) {
+      top: 4px;
+      right: 4px;
+      width: 13px;
+      height: 13px;
+    }
+
+    &::after {
+      width: 6px;
+      height: 3px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    width: 60px;
+  }
+
+  &.hero-floating-card-0 {
+    top: 26%;
+    right: 0%;
+
+    @media (max-width: 640px) {
+      right: 2%;
+    }
+  }
+
+  &.hero-floating-card-1 {
+    top: 68%;
+    left: 8%;
+
+    @media (max-width: 640px) {
+      left: 6%;
+    }
+  }
+
+  &.hero-floating-card-2 {
+    right: 5%;
+    bottom: 13%;
+
+    @media (max-width: 640px) {
+      right: 6%;
+      bottom: 11%;
+    }
+  }
+}
+
+.hero-visual-column {
+  @media (max-width: 640px) {
+    padding: 0;
+  }
+}
+
+:host-context(.theme-light) {
+  .hero-visual {
+    .hero-scan-image {
+      filter: drop-shadow(0 24px 36px color-mix(in srgb, var(--color-text) 18%, transparent))
+        drop-shadow(0 0 42px color-mix(in srgb, var(--color-accent) 24%, transparent));
+    }
+  }
+}
+
+@keyframes stage-scan-float {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  25% {
+    transform: rotateX(2deg) rotateY(-2deg) translateY(-4px);
+  }
+
+  50% {
+    transform: rotateX(-1.5deg) rotateY(2deg) translateY(0);
+  }
+
+  75% {
+    transform: rotateX(1.5deg) rotateY(1.5deg) translateY(4px);
+  }
+
+  100% {
+    transform: rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+}

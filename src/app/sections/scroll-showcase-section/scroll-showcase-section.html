@@ -1,0 +1,79 @@
+<section
+  class="showcase-stage position-relative w-100 overflow-hidden"
+  [class.showcase-stage-bg-hero]="activePanelKey() === 'hero'"
+  [class.showcase-stage-bg-demos]="activePanelKey() === 'demos'"
+  [class.showcase-stage-bg-know-more]="activePanelKey() === 'knowMore'"
+  [class.showcase-stage-bg-next-steps]="activePanelKey() === 'nextSteps'"
+  #showcaseStage
+  (wheel)="onWheel($event)"
+  (touchstart)="onTouchStart($event)"
+  (touchend)="onTouchEnd($event)"
+>
+  <div
+    class="showcase-background position-absolute top-0 start-0 w-100 h-100"
+  ></div>
+
+  @for (panel of panels; track panel.key; let panelIndex = $index) {
+    <article
+      class="showcase-panel position-absolute top-0 start-0 w-100 h-100 overflow-hidden"
+      [class.showcase-panel-hero]="panel.key === 'hero'"
+      [class.showcase-panel-last]="panelIndex === panels.length - 1"
+      [class.is-active]="visiblePanelIndex() === panelIndex"
+      [id]="panel.key"
+      #showcasePanel
+    >
+      <div class="container app-container h-100 d-flex align-items-center justify-content-center">
+        <div class="showcase-panel-content w-100 mx-auto" #panelContent>
+          @switch (panel.key) {
+            @case ('hero') {
+              <app-hero-section (ctaSelected)="goTo(1)" />
+            }
+
+            @case ('demos') {
+              <app-digital-solutions-section />
+            }
+
+            @case ('knowMore') {
+              <app-know-more-section />
+            }
+
+            @case ('nextSteps') {
+              <app-next-steps-section />
+            }
+          }
+        </div>
+      </div>
+
+      @if (panelIndex === panels.length - 1) {
+        <app-footer />
+      }
+    </article>
+  }
+
+  <nav
+    class="stage-indicator position-absolute top-50 end-0 translate-middle-y d-flex align-items-center pe-1 pe-md-2"
+    aria-label="Page sections"
+  >
+    <div class="indicator-track d-flex flex-column gap-2 py-1 position-relative">
+      @for (panel of panels; track panel.key; let index = $index) {
+        <button
+          class="indicator-dot"
+          type="button"
+          [class.is-active]="activeIndex() === index"
+          [attr.aria-label]="ui().indicatorLabelPrefix + ' ' + panel.key"
+          (click)="goTo(index)"
+        ></button>
+      }
+    </div>
+  </nav>
+
+  <div
+    class="scroll-explore position-absolute start-50 translate-middle-x d-inline-flex align-items-center text-center pe-none"
+    [class.is-hidden]="activeIndex() === panels.length - 1"
+  >
+    <span class="scroll-mouse" aria-hidden="true">
+      <span></span>
+    </span>
+    <span>{{ ui().scrollExplore }}</span>
+  </div>
+</section>

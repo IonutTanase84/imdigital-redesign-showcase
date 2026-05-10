@@ -1,0 +1,16 @@
+<footer class="showcase-footer position-absolute bottom-0 start-0 w-100">
+  <div class="container app-container">
+    <nav
+      class="d-flex flex-row flex-wrap align-items-center justify-content-center justify-content-lg-between gap-3 showcase-footer-links"
+      aria-label="Footer links"
+    >
+      @for (link of content.links; track link) {
+        <a href="#">{{ link }}</a>
+      }
+    </nav>
+
+    <p class="mb-0 text-center showcase-footer-copy">
+      © {{ year }} - {{ content.poweredBy }}
+    </p>
+  </div>
+</footer>

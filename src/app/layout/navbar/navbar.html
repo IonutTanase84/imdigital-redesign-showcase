@@ -1,0 +1,140 @@
+<nav class="site-navbar" #navbar>
+  <div
+    class="container app-container h-100 d-flex align-items-center justify-content-between navbar-inner"
+  >
+    <a class="navbar-logo" routerLink="/" [attr.aria-label]="t('homeAria')" (click)="goHome()">
+      <app-logo-icon />
+      <span>{{ brand.name }}</span>
+    </a>
+
+    <div class="navbar-links h-100 d-none d-lg-flex align-items-center gap-5 p-0">
+      @for (item of items; track item.id) {
+        @if (item.submenu; as submenu) {
+          <div
+            class="navbar-menu-wrapper h-100 d-flex align-items-center"
+            (mouseenter)="openDesktopSubmenu(desktopSubmenu)"
+            (mouseleave)="closeDesktopMenu()"
+          >
+            <button
+              class="navbar-link p-0"
+              type="button"
+              aria-haspopup="true"
+              [attr.aria-expanded]="openDesktopMenu === desktopSubmenu"
+              (focus)="openDesktopSubmenu(desktopSubmenu)"
+            >
+              {{ t(item.label) }}
+            </button>
+
+            <div class="navbar-submenu mt-1" #desktopSubmenu>
+              <div
+                class="container w-100 d-flex flex-column flex-md-row justify-content-md-center align-items-md-center navbar-submenu-inner px-0"
+              >
+                @for (submenuItem of submenu; track submenuItem.id) {
+                  <a routerLink="/" [fragment]="submenuItem.fragment" (click)="closeDesktopMenu()">
+                    {{ t(submenuItem.label) }}
+                  </a>
+                }
+              </div>
+            </div>
+          </div>
+        } @else {
+          <a class="navbar-link" routerLink="/" [fragment]="item.fragment">
+            {{ t(item.label) }}
+          </a>
+        }
+      }
+    </div>
+
+    <div class="navbar-actions d-none d-lg-flex align-items-center gap-2">
+      <button
+        class="navbar-language"
+        type="button"
+        [attr.aria-label]="t('changeLanguage')"
+        (click)="toggleLanguage()"
+      >
+        {{ languageButtonText() }}
+      </button>
+
+      <button
+        class="navbar-theme"
+        type="button"
+        [attr.aria-label]="t('switchTheme')"
+        (click)="toggleTheme()"
+      >
+        {{ themeButtonText() }}
+      </button>
+    </div>
+
+    <div class="navbar-actions navbar-actions-mobile d-flex d-lg-none align-items-center gap-2">
+      <button
+        class="navbar-language"
+        type="button"
+        [attr.aria-label]="t('changeLanguage')"
+        (click)="toggleLanguage()"
+      >
+        {{ languageButtonText() }}
+      </button>
+
+      <button
+        class="navbar-theme"
+        type="button"
+        [attr.aria-label]="t('switchTheme')"
+        (click)="toggleTheme()"
+      >
+        {{ themeButtonText() }}
+      </button>
+    </div>
+
+    <button
+      class="navbar-burger navbar-burger-mobile-center d-lg-none"
+      type="button"
+      [attr.aria-label]="t('toggleMenu')"
+      [class.is-open]="isMobileOpen()"
+      (click)="toggleMobileMenu($event)"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" #mobileMenu>
+    <div class="container app-container h-100 d-flex flex-column mobile-menu-shell">
+      <div class="d-flex flex-column mobile-menu-content">
+        <div class="d-flex flex-column mobile-menu-main">
+          @for (item of items; track item.id) {
+            @if (item.submenu; as submenu) {
+              <button
+                class="mobile-menu-link"
+                type="button"
+                aria-haspopup="true"
+                [attr.aria-expanded]="openMobileMenuId() === item.id"
+                (click)="toggleMobileSubmenu(item.id, $event)"
+              >
+                {{ t(item.label) }}
+              </button>
+
+              @if (openMobileMenuId() === item.id) {
+                <div class="d-flex flex-column mobile-submenu-inner">
+                  @for (submenuItem of submenu; track submenuItem.id) {
+                    <a routerLink="/" [fragment]="submenuItem.fragment" (click)="closeMobileMenu()">
+                      {{ t(submenuItem.label) }}
+                    </a>
+                  }
+                </div>
+              }
+            } @else {
+              <a
+                class="mobile-menu-link"
+                routerLink="/"
+                [fragment]="item.fragment"
+                (click)="closeMobileMenu()"
+              >
+                {{ t(item.label) }}
+              </a>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

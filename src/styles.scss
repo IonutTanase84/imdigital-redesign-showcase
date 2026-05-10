@@ -1,0 +1,112 @@
+@use './styles/typography';
+
+:root,
+:root.theme-dark {
+  --color-bg: #050816;
+  --color-surface: rgba(255, 255, 255, 0.08);
+
+  --color-text: #f8fafc;
+  --color-text-muted: rgba(248, 250, 252, 0.72);
+
+  --color-primary: #3b82f6;
+  --color-primary-soft: #60a5fa;
+  --color-accent: #22d3ee;
+  --color-gradient-start: #38bdf8;
+  --color-gradient-mid: #8b5cf6;
+  --color-gradient-end: #d946ef;
+  --color-on-gradient: #ffffff;
+  --gradient-brand: linear-gradient(
+    90deg,
+    var(--color-gradient-start),
+    var(--color-gradient-mid),
+    var(--color-gradient-end)
+  );
+
+  --color-border: rgba(255, 255, 255, 0.14);
+  --feature-card-bg: rgba(255, 255, 255, 0.08);
+  --feature-card-bg-secondary: rgba(255, 255, 255, 0.045);
+  --feature-card-border: rgba(255, 255, 255, 0.18);
+  --feature-card-action-bg: rgba(255, 255, 255, 0.075);
+  --feature-card-orb: rgba(168, 85, 247, 0.16);
+  --feature-card-floating-border: rgba(34, 211, 238, 0.34);
+  --feature-card-floating-bg: rgba(255, 255, 255, 0.12);
+  --feature-icon-route: #60a5fa;
+  --feature-icon-magnet: #c084fc;
+  --feature-icon-coins: #fbbf24;
+  --feature-icon-scan-face: #2dd4bf;
+  --feature-icon-brain: #f472b6;
+  --feature-icon-user-scan: #38bdf8;
+  --feature-icon-code-window: #a78bfa;
+  --feature-icon-eye: #22d3ee;
+  --feature-icon-chip: #34d399;
+  --feature-icon-badge-check: #4ade80;
+  --feature-icon-laptop-code: #818cf8;
+  --feature-icon-devices: #f97316;
+  --feature-icon-help-square: #fda4af;
+
+  --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-thin: 100;
+  --font-regular: 400;
+  --font-bold: 700;
+  --font-black: 900;
+
+  --navbar-height: 72px;
+  --container-max: 1240px;
+
+  --transition-fast: 180ms ease;
+  --transition-medium: 360ms ease;
+}
+
+:root.theme-light {
+  --color-bg: #eef5ff;
+  --color-surface: rgba(2, 6, 23, 0.06);
+
+  --color-text: #0f2b52;
+  --color-text-muted: rgba(15, 43, 82, 0.68);
+
+  --color-primary: #2563eb;
+  --color-primary-soft: #60a5fa;
+  --color-accent: #0891b2;
+  --color-gradient-start: #0891b2;
+  --color-gradient-mid: #2563eb;
+  --color-gradient-end: #7c3aed;
+  --color-on-gradient: #ffffff;
+
+  --color-border: rgba(15, 43, 82, 0.2);
+  --feature-card-bg: rgba(203, 213, 225, 0.17);
+  --feature-card-bg-secondary: rgba(255, 255, 255, 0.46);
+  --feature-card-border: rgba(15, 43, 82, 0.14);
+  --feature-card-action-bg: rgba(15, 23, 42, 0.06);
+  --feature-card-orb: rgba(37, 99, 235, 0.12);
+  --feature-card-floating-border: rgba(8, 145, 178, 0.32);
+  --feature-card-floating-bg: rgba(15, 23, 42, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  font-weight: var(--font-regular);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: default;
+}
+
+.app-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 48px;
+
+  @media (max-width: 1024px) {
+    padding: 0 32px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0 25px;
+  }
+}

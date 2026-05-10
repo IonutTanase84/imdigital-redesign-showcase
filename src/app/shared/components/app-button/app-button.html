@@ -1,0 +1,17 @@
+<button
+  class="app-button"
+  [class.app-button-light]="variant() === 'light'"
+  [class.app-button-dark]="variant() === 'dark'"
+  [class.app-button-sm]="size() === 'sm'"
+  [class.app-button-md]="size() === 'md'"
+  [class.app-button-lg]="size() === 'lg'"
+  [class.app-button-icon]="size() === 'icon'"
+  [type]="type()"
+  [attr.data-track]="trackingName()"
+  [attr.aria-label]="ariaLabel() || label()"
+  (click)="pressed.emit()">
+  <ng-content />
+  @if (label()) {
+    {{ label() }}
+  }
+</button>
